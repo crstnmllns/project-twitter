@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+<h1 class="text-center">Tweets</h1>
+    <tr>
+      <% @tweets.each do |tweet| %>
+      <div class="card">
+        <div class="card-header">
+          <td><img class="avatar" src="<%= tweet.user.avatar %>" alt="avatar"></td>
+          <td><%= tweet.user.username %></td>
+        </div>
+        <div class="card-body">
+          <h5 class="card-text"><td><%= tweet.content %></td></h5>
+          <p class="text-muted"><%= time_ago_in_words(tweet.created_at)%></p>
+          <i class="fa fa-heart fa-lg text-muted" aria-hidden="true"></i>
+          <i class="fa fa-retweet fa-lg text-muted" aria-hidden="true"></i>
+        </div>
+      </div>
+    </tr>
+    <br>
+      <% end %>
+
+
+
+</div>
