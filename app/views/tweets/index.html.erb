@@ -11,8 +11,10 @@
         <div class="card-body">
           <h5 class="card-text"><td><%= tweet.content %></td></h5>
           <p class="text-muted"><%= time_ago_in_words(tweet.created_at)%></p>
-          <i class="fa fa-heart fa-lg text-muted" aria-hidden="true"></i>
           <i class="fa fa-retweet fa-lg text-muted" aria-hidden="true"></i>
+          <div><%= link_to '', tweet_retweet_path(tweet), method: :post if user_signed_in? && tweet.user_id != current_user.id %></div>
+          <%= link_to '' , tweet_like_path(tweet.id), method: :post , class: "fa fa-heart fa-lg text-muted" %>
+          <p><%= tweet.likes.count %> </p>
         </div>
       </div>
     </tr>

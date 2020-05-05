@@ -66,3 +66,7 @@ gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 gem 'kaminari' , :git => 'https://github.com/kaminari/kaminari'
+
+gem 'rails-erd', group: :development
+
+gem 'jquery-rails'

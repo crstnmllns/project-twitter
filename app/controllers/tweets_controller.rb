@@ -31,6 +31,7 @@ class TweetsController < ApplicationController
   # POST /tweets.json
   def create
     @tweet = Tweet.new(tweet_params)
+    @tweet.user_id = current_user.id
 
     @tweet.user = current_user
     respond_to do |format|
@@ -68,14 +69,37 @@ class TweetsController < ApplicationController
     end
   end
 
+  def like
+    tweet = Tweet.find(params[:tweet_id])
+    if Like.exists?(tweet_id: params[:tweet_id],user_id: current_user.id)
+      flash[:notice] = "You can't like more than once"
+      redirect_to '/tweets#index'
+    else
+      tweet.likes.create(user_id: current_user.id)
+      redirect_to '/tweets#index'
+    end
+  end
+
+  def retweet
+    #@retweet = Tweet.create(content:@tweet.content, user: current_user, tweet_id: @tweet.id)
+    tweet = current_user.tweets.new(tweet_id: @tweet.id)
+    if tweet.save
+      redirect_to tweets_path
+    else
+      redirect_to :back, alert: "Unable to retweet"
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
       @tweet = Tweet.find(params[:id])
     end
 
+
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content)
+      params.require(:tweet).permit(:content , :user_id , :tweet_id)
     end
 end
