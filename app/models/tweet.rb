@@ -1,11 +1,10 @@
 class Tweet < ApplicationRecord
   belongs_to :user
-  validates :content , presence: true
-  has_many :likes , dependent: :destroy
-  belongs_to :tweet
-
-
+  has_many :likes, dependent: :destroy
+  has_many :tweets
+  # belongs_to :tweet
+  
+  validates :content, presence: true
 
   paginates_per 50
-
 end
