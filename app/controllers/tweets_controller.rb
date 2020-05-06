@@ -81,13 +81,16 @@ class TweetsController < ApplicationController
   end
 
   def retweet
-    #@retweet = Tweet.create(content:@tweet.content, user: current_user, tweet_id: @tweet.id)
-    tweet = current_user.tweets.new(tweet_id: @tweet.id)
-    if tweet.save
-      redirect_to tweets_path
-    else
-      redirect_to :back, alert: "Unable to retweet"
-    end
+    @tweet = Tweet.find(params[:tweet_id])
+    @retweet = Tweet.create(content: "/////Retweet - #{@tweet.content}" , user: current_user , tweet_id: @tweet.id)
+    #tweet.tweets.new(content: @tweet.content , user: current_user ,tweet_id: @tweet.id)
+    #@retweet = Tweet.create(content: tweet.content, user: current_user, tweet_id: tweet.id)
+    #tweet = current_user.tweets.new(content: @tweet.content , tweet_id: @tweet.id)
+    #if tweet.save
+    #  redirect_to tweets_path
+    #else
+    #  redirect_to :back, alert: "Unable to retweet"
+    #end
   end
 
 
@@ -100,6 +103,10 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
+      params.require(:tweet).permit(:content , :user_id , :tweet_id)
+    end
+
+    def retweet_params
       params.require(:tweet).permit(:content , :user_id , :tweet_id)
     end
 end

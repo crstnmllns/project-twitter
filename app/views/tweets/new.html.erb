@@ -1,5 +1,8 @@
+<% if user_signed_in? %>
 <h1>New Tweet</h1>
-
 <%= render 'form', tweet: @tweet %>
-
-<%= link_to 'Back', tweets_path %>
+<% else %>
+<%= flash[:alert] = "User is not Authenticate." %>
+<br>
+<%= link_to 'Log in', new_user_session_url %>
+<% end %>

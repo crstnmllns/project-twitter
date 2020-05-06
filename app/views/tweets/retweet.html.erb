@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+<h1>New Retweet</h1>
+<%= render 'retweet', tweet: @retweet %>
+<% else %>
+<%= flash[:alert] = "User is not Authenticate." %>
+<br>
+<%= link_to 'Log in', new_user_session_url %>
+<% end %>
