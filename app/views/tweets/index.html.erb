@@ -1,39 +1,32 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
-<h1 class="text-center">Tweets</h1>
+<h3 class="text-center">Tweets</h3>
     <tr>
       <% @tweets.each do |tweet| %>
       <div class="card">
         <div class="card-header">
-          <td><img class="avatar" src="<%= tweet.user.avatar %>" alt="avatar"></td>
-          <td><%= tweet.user.username %></td>
+            <td><img class="avatar" src="<%= tweet.user.avatar %>" alt="avatar"></td>
+            <td><%= tweet.user.username %></td>
         </div>
         <div class="card-body">
           <h5 class="card-text"><td><%= tweet.content %></td></h5>
           <% if user_signed_in? %>
-          <table>
-            <thead>
-              <tr>
-                <th><%= link_to '', tweet_retweet_path(tweet.id), method: :post , class: "fa fa-retweet fa-lg text-muted"  %></th>
-                <th><%= link_to '' , tweet_like_path(tweet.id), method: :post , class: "fa fa-heart fa-lg text-muted" %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td></td>
-                <td><p><%= tweet.likes.count %> </p></td>
-              </tr>
-            </tbody>
-
-
-
-
-
-
-          </table>
-
+              <table class="col-2">
+                <thead>
+                  <tr >
+                    <th><%= link_to '', tweet_retweet_path(tweet.id), method: :post , class: "fa fa-retweet fa-lg text-muted"  %></th>
+                    <th><%= link_to '' , tweet_like_path(tweet.id), method: :post , class: "fa fa-heart fa-lg text-muted" %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td><p><%= tweet.likes.count %> </p></td>
+                  </tr>
+                </tbody>
+              </table>
           <% end %>
-                <p class="text-muted"><%= time_ago_in_words(tweet.created_at)%></p>
+              <a href="<%= tweet_url(tweet.id) %>"><p class="text-muted"><%= time_ago_in_words(tweet.created_at)%></p></a>
         </div>
       </div>
     </tr>

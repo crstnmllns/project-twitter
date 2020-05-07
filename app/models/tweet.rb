@@ -6,7 +6,7 @@ class Tweet < ApplicationRecord
 
   validates :content, presence: true
 
-  paginates_per 3
+  paginates_per 50
 
-  
+
 end

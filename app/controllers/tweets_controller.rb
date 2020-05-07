@@ -15,6 +15,8 @@ class TweetsController < ApplicationController
   # GET /tweets/1
   # GET /tweets/1.json
   def show
+    @likes = Like.joins(:user).where(tweet_id: @tweet.id)
+
 
   end
 
@@ -91,6 +93,8 @@ class TweetsController < ApplicationController
     #else
     #  redirect_to :back, alert: "Unable to retweet"
     #end
+
+
   end
 
 

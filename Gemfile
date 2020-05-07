@@ -70,3 +70,5 @@ gem 'kaminari' , :git => 'https://github.com/kaminari/kaminari'
 gem 'rails-erd', group: :development
 
 gem 'jquery-rails'
+gem 'activeadmin'
+gem 'inherited_resources' , github: 'activeadmin/inherited_resources'

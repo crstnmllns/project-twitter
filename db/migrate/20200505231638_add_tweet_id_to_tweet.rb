@@ -3,3 +3,4 @@ class AddTweetIdToTweet < ActiveRecord::Migration[5.2]
     add_column :tweets, :tweet_id, :integer
   end
 end
+# rails g migration AddTweetIdToTweet tweet_id:references

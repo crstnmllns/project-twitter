@@ -7,3 +7,4 @@ class CreateTweets < ActiveRecord::Migration[5.2]
     end
   end
 end
+# rails g scaffold Tweet content:text           ///user:references
