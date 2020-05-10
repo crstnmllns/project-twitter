@@ -72,3 +72,6 @@ gem 'rails-erd', group: :development
 gem 'jquery-rails'
 gem 'activeadmin'
 gem 'inherited_resources' , github: 'activeadmin/inherited_resources'
+
+#gem 'active_admin_role'
+gem 'activeadmin_addons'

@@ -6,16 +6,19 @@ class User < ApplicationRecord
 
   has_many :tweets , dependent: :destroy
   has_many :likes, dependent: :destroy
-  
+
   scope :active, ->{where.not(is_active: nil)}
   scope :deactive, ->{where(is_active: nil)}
 
 
-  def activate_account!
-   update_attribute :is_active, true
- end
+  def destroy
+      update_attributes(is_active: true) unless is_active
+  end
 
- def deactivate_account!
-   update_attribute :is_active, false
- end
-end
+  def active_for_authentication?
+      super && is_active
+  end
+
+
+
+  end

@@ -10,6 +10,8 @@ class TweetsController < ApplicationController
 
       #@tweets = current_user.tweets
       @tweets = Tweet.order("created_at DESC").page(params[:page])
+
+      #@tweet_amount = Tweet.tweet_amount
   end
 
   # GET /tweets/1

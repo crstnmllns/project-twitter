@@ -4,20 +4,26 @@ ActiveAdmin.register User do
   scope :active
   scope :deactive
 
+
+  #scope: :cant , -> {where("user_id = #{@tweets.user_id}")}
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
-  #
+
   permit_params :username, :avatar, :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :is_active
 
-  def activate_account!
-   update_attribute :is_active, true
-  end
 
-  def deactivate_account!
-    update_attribute :is_active, false
-  end
+
+       index do
+         selectable_column
+         id_column
+         column :email
+         column :username
+         column :is_active
+         actions
+       end
 
     action_item :active, only: :show do
       link_to "Active" , active_admin_user_path(user), method: :put if !user.is_active?
@@ -27,17 +33,20 @@ ActiveAdmin.register User do
       link_to "Deactive" , deactive_admin_user_path(user), method: :put if user.is_active?
     end
 
+
+
      member_action :active , method: :put do
        user = User.find(params[:id])
-       user.update()
+       user.update(is_active: true)
        redirect_to admin_user_path(user)
      end
 
      member_action :deactive , method: :put do
        user = User.find(params[:id])
-       user.deactivate_account!
+       user.update(is_active: false)
        redirect_to admin_user_path(user)
      end
+
 
   #
   # or
