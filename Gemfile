@@ -75,3 +75,7 @@ gem 'inherited_resources' , github: 'activeadmin/inherited_resources'
 
 #gem 'active_admin_role'
 gem 'activeadmin_addons'
+
+gem 'ransack'
+
+gem 'dotenv-rails'

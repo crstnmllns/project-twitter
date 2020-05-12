@@ -2,14 +2,21 @@ class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!
 
-
-
   # GET /tweets
   # GET /tweets.json
   def index
+    @q = Tweet.ransack(params[:q])
+    @tweets = @q.result(distinct: true).order("created_at DESC").page(params[:page])
+
+    @tweets.map do |tweet|
+      tweet.content = hashtags(tweet)
+      tweet.content
+    end
+
+
 
       #@tweets = current_user.tweets
-      @tweets = Tweet.order("created_at DESC").page(params[:page])
+      #@tweets = Tweet.order("created_at DESC").page(params[:page])
 
       #@tweet_amount = Tweet.tweet_amount
   end
@@ -86,7 +93,10 @@ class TweetsController < ApplicationController
 
   def retweet
     @tweet = Tweet.find(params[:tweet_id])
-    @retweet = Tweet.create(content: "/////Retweet - #{@tweet.content}" , user: current_user , tweet_id: @tweet.id)
+    @retweet = Tweet.create(content: @tweet.content , user: current_user , tweet_id: @tweet.id)
+    #if @retweet.save
+    #  redirect_to root_path, notice: 'Your Retweet was successfully published.'
+    #end
     #tweet.tweets.new(content: @tweet.content , user: current_user ,tweet_id: @tweet.id)
     #@retweet = Tweet.create(content: tweet.content, user: current_user, tweet_id: tweet.id)
     #tweet = current_user.tweets.new(content: @tweet.content , tweet_id: @tweet.id)
@@ -95,10 +105,7 @@ class TweetsController < ApplicationController
     #else
     #  redirect_to :back, alert: "Unable to retweet"
     #end
-
-
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -106,13 +113,14 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find(params[:id])
     end
 
+    def hashtags(tweet)
+      content_arr = tweet.content.split(' ')
+      modified_content = content_arr.map { |word| word.starts_with?("#") ? "<a href='" + tweets_path + "?utf8=✓&q%5Bcontent_cont%5D=#{word}&commit=Search' class=''>#{word}</a>" : word }
+      modified_content.join(' ')
+    end
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content , :user_id , :tweet_id)
-    end
-
-    def retweet_params
       params.require(:tweet).permit(:content , :user_id , :tweet_id)
     end
 end

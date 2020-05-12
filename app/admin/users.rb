@@ -22,6 +22,15 @@ ActiveAdmin.register User do
          column :email
          column :username
          column :is_active
+         column :tweets do |tweet|
+          tweet.tweets.count
+        end
+        column :likes do |like|
+          like.likes.count
+        end
+        column :tweets do |retweet|
+          retweet.tweet_id.count
+        end
          actions
        end
 

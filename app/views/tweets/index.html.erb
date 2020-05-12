@@ -1,5 +1,17 @@
 <p id="notice"><%= notice %></p>
+
 <div class="container">
+    <div class="">
+      <div class="">
+          <%= search_form_for @q do |f| %>
+      <div class="form-group">
+          <%= f.label :content %>
+          <%= f.search_field :content_cont , class: "formcontrol", placeholder: "Search text" %>
+          <%= f.submit "Search", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+      </div>
+    </div>
 <h3 class="text-center">Tweets</h3>
     <tr>
       <% @tweets.each do |tweet| %>
@@ -9,7 +21,7 @@
             <td><%= tweet.user.username %></td>
         </div>
         <div class="card-body">
-          <h5 class="card-text"><td><%= tweet.content %></td></h5>
+          <h5 class="card-text"><td><%= tweet.content.html_safe %></td></h5>
           <% if user_signed_in? %>
               <table class="col-2">
                 <thead>
@@ -22,7 +34,7 @@
                   <tr>
                     <td></td>
                     <td><p><%= tweet.likes.count %> </p></td>
-                    
+
                   </tr>
                 </tbody>
               </table>
