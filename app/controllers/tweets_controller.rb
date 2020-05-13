@@ -12,10 +12,7 @@ class TweetsController < ApplicationController
       tweet.content = hashtags(tweet)
       tweet.content
     end
-      #@tweets = current_user.tweets
-      #@tweets = Tweet.order("created_at DESC").page(params[:page])
 
-      #@tweet_amount = Tweet.tweet_amount
   end
 
   # GET /tweets/1
@@ -112,7 +109,7 @@ class TweetsController < ApplicationController
 
     def hashtags(tweet)
       content_arr = tweet.content.split(' ')
-      modified_content = content_arr.map { |word| word.starts_with?("#") ? "<a href='" + tweets_path + "?utf8=✓&q%5Bcontent_cont%5D=#{word}&commit=Search' class=''>#{word}</a>" : word }
+      modified_content = content_arr.map { |word| word.starts_with?("#") ? "<a href='" + tweets_path + "?utf8=✓&q%5Bcontent_cont%5D=#{word.delete("#")}&commit=Search' class=''>#{word}</a>" : word }
       modified_content.join(' ')
     end
 
