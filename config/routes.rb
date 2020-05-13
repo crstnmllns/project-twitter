@@ -14,9 +14,12 @@ Rails.application.routes.draw do
 
   namespace :api do
    resources :news, only: [:index, :date]
-   get '/:date_in/:date_out', to: 'api/news#date', as: "date"
+
  end
+
+get 'api/:date_in/:date_out', to: 'api/news#date', as: "date"
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
+
 
 end

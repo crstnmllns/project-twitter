@@ -1,6 +1,6 @@
 class Api::NewsController < ApplicationController
-  include ActionController::HttpAuthentication::Basic::ControllerMethods
-  http_basic_authenticate_with email: "admin" , password: "admin"
+  #include ActionController::HttpAuthentication::Basic::ControllerMethods
+  #http_basic_authenticate_with email: "admin" , password: "admin"
 
 
 def index
@@ -19,7 +19,7 @@ def index
 
 
     def date
-      @tweets= Tweet.where("created_at >= ? AND created_at <= ?", params[:date_in], params[:date_out])
+      @tweets = Tweet.where("created_at >= ? AND created_at <= ?", params[:date_in], params[:date_out])
 
       render json: @tweets
     end
