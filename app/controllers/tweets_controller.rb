@@ -12,9 +12,6 @@ class TweetsController < ApplicationController
       tweet.content = hashtags(tweet)
       tweet.content
     end
-
-
-
       #@tweets = current_user.tweets
       #@tweets = Tweet.order("created_at DESC").page(params[:page])
 

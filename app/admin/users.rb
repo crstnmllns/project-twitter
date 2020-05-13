@@ -28,9 +28,7 @@ ActiveAdmin.register User do
         column :likes do |like|
           like.likes.count
         end
-        column :tweets do |retweet|
-          retweet.tweet_id.count
-        end
+        
          actions
        end
 

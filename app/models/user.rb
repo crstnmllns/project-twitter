@@ -20,5 +20,10 @@ class User < ApplicationRecord
   end
 
 
+  def is_active
+  !self[:is_active].nil? ? self[:is_active] : true 
+  end
+
+
 
   end

@@ -1,6 +1,6 @@
 class Api::NewsController < ApplicationController
-  #include ActionController::HttpAuthentication::Basic::ControllerMethods
-  #http_basic_authenticate_with email: "admin" , password: "admin"
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
+  http_basic_authenticate_with email: "admin" , password: "admin"
 
 
 def index
